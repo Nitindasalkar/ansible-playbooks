@@ -1,0 +1,28 @@
+---
+  - name: installing the docker and add current user to docker group
+    hosts: all
+    become: yes
+
+    tasks:
+    - name: install docker
+      apt:
+        name: docker.io
+        state: present
+    - name: starting the docker
+      service:
+        name: docker
+        state: started
+    - name: get the current username
+      command: whoami
+      become: false
+      register: whoami
+    - name: add the current user to docker group    
+      user:
+        name: "{{whoami.stdout}}"
+        group: users
+        groups: docker
+    - name: reboot the system
+      reboot:
+        msg: "rebooting the system"
+        reboot_timeout: 60
+
