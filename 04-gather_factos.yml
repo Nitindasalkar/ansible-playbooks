@@ -1,0 +1,7 @@
+---
+- name: gather facts
+  hosts: all
+  tasks:
+    - name: show factos of servers
+      debug:
+        msg: "{{ ansible_os_family }}"          

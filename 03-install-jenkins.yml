@@ -1,0 +1,22 @@
+---
+  - name: install the jenkins
+    hosts: all
+    become: yes
+
+    tasks:
+      - name: copy jenkins script
+        copy :
+          src: /home/ubuntu/ansible-playbooks/jenkins.sh
+          dest: /home/ubuntu
+          mode: "777"
+      - name: install jenkins
+        script: sh /home/ubuntu/jenkins.sh
+        become: yes        
+        #notify: restart_jenkins    
+     
+    handlers:
+      - name: restart_jenkins
+        service:
+          name: jenkins
+          state: restarted
+          enabled: yes  
