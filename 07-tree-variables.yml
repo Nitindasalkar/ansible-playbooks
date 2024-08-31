@@ -1,0 +1,10 @@
+---
+- name: install the tree and demonstrate the use of variables
+  hosts: all
+  become: yes
+  tasks:
+    - name: install the tree on nodes
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"

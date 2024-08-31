@@ -8,7 +8,7 @@
       apt:
         name: docker.io
         state: present
-    - name: starting the docker
+    - name:  starting the docker
       service:
         name: docker
         state: started

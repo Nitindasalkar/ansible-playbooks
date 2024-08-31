@@ -1,0 +1,19 @@
+---
+- name: install the apache2 and demonstration of handler
+  hosts: all
+  become: yes
+  tasks:
+    - name: install the apache2
+      apt:
+        name: apache2
+        state: present
+    - name: edit the index.html file
+      copy:
+        content: "this is a handler demo\n"
+        dest: /var/www/html/index.html
+      notify: restart_apache2
+  handlers:
+      - name: restart_apache2
+        service:
+          name: apache2
+          state: restarted

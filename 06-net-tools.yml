@@ -1,0 +1,13 @@
+---
+- name: install the net-tools on nodes
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: install the net-tools on nodes
+    apt:
+      name: net-tools
+      state: present
+  - name: start the net-tools service
+    service:
+      state: restarted

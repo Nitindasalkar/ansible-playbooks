@@ -8,11 +8,12 @@
         copy :
           src: /home/ubuntu/ansible-playbooks/jenkins.sh
           dest: /home/ubuntu
+          owner: ubuntu
+          group: users
           mode: "777"
       - name: install jenkins
-        script: sh /home/ubuntu/jenkins.sh
-        become: yes        
-        #notify: restart_jenkins    
+        script: /home/ubuntu/jenkins.sh
+        notify: restart_jenkins    
      
     handlers:
       - name: restart_jenkins
